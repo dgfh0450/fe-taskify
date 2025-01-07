@@ -15,7 +15,9 @@ export function createTaskForm(columnIdx) {
 
 
 export function renderTasks(columnIdx) {
-    const columnCardList = document.getElementsByClassName('column')[columnIdx].getElementsByTagName('ol')[0];
+    const columnElement = document.getElementsByClassName('column')[columnIdx];
+    const columnCardList = columnElement.getElementsByTagName('ol')[0];
+    const counterElement = columnElement.getElementsByClassName('column_task_counter')[0];
     
     // 현재 카드 전부 제거
     while(columnCardList.firstChild) {
@@ -23,7 +25,8 @@ export function renderTasks(columnIdx) {
     }
 
     const tasks = columns[columnIdx];
-    console.log(tasks);
+    counterElement.textContent = tasks.length;
+    
     for(let task of tasks) {
         const newTask = createTask(task);
         columnCardList.appendChild(newTask);
